@@ -117,7 +117,7 @@ openclaw plugins list
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `servers` | array | `[]` | List of MCP servers to connect to |
-| `toolPrefix` | boolean | `true` | Prefix tool names with server name (e.g., `myserver_toolname`) |
+| `toolPrefix` | boolean | `true` | Prefix tool names with server name using double underscore (e.g., `myserver__toolname`) |
 
 ### Server Options
 
