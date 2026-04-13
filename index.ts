@@ -27,7 +27,7 @@ export default function (api: any) {
     // No config and cache not yet populated (expected on cold start for
     // non-primary instances — they'll get tools once the primary completes
     // service.start() and subsequent sessions resolve factories).
-    console.log("[mcp-adapter] No servers configured");
+    console.log("[openclaw-mcp-adapter] No servers configured");
     return;
   }
 
@@ -56,17 +56,17 @@ export default function (api: any) {
   const pool = sharedPool;
 
   api.registerService({
-    id: "mcp-adapter",
+    id: "openclaw-mcp-adapter",
 
     async start() {
       for (const server of config.servers) {
         try {
-          console.log(`[mcp-adapter] Connecting to ${server.name}...`);
+          console.log(`[openclaw-mcp-adapter] Connecting to ${server.name}...`);
           await pool.connect(server);
 
           const tools = await pool.listTools(server.name);
           console.log(
-            `[mcp-adapter] ${server.name}: discovered ${tools.length} tools`
+            `[openclaw-mcp-adapter] ${server.name}: discovered ${tools.length} tools`
           );
 
           const defs: ToolDef[] = tools.map((tool: any) => {
@@ -102,11 +102,11 @@ export default function (api: any) {
           sharedToolCache.set(server.name, defs);
 
           for (const def of defs) {
-            console.log(`[mcp-adapter] Ready: ${def.name}`);
+            console.log(`[openclaw-mcp-adapter] Ready: ${def.name}`);
           }
         } catch (err) {
           console.error(
-            `[mcp-adapter] Failed to connect to ${server.name}:`,
+            `[openclaw-mcp-adapter] Failed to connect to ${server.name}:`,
             err
           );
         }
@@ -114,11 +114,11 @@ export default function (api: any) {
     },
 
     async stop() {
-      console.log("[mcp-adapter] Shutting down...");
+      console.log("[openclaw-mcp-adapter] Shutting down...");
       await pool.closeAll();
       sharedToolCache.clear();
       sharedPool = null;
-      console.log("[mcp-adapter] All connections closed");
+      console.log("[openclaw-mcp-adapter] All connections closed");
     },
   });
 }
