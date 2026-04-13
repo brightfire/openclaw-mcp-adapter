@@ -145,11 +145,13 @@ Use `${VAR_NAME}` in `env` and `headers` values to reference environment variabl
 
 ## How It Works
 
-1. On gateway startup, the plugin connects to each configured MCP server
-2. Calls `listTools()` to discover available tools
-3. Registers each tool with OpenClaw using its name, description, and JSON Schema
-4. When an agent invokes a tool, the plugin proxies the call to the MCP server
-5. If the connection dies, it automatically reconnects on the next tool call
+1. On gateway startup, `register()` registers a factory function per configured MCP server
+2. `service.start()` connects to each server and calls `listTools()` to discover available tools
+3. Discovered tools are stored in a module-level shared cache (survives across plugin reloads)
+4. When a session resolves tools, the factory returns cached tool definitions registered with OpenClaw
+5. Sub-agent sessions with empty `pluginConfig` fall back to the shared cache from the primary gateway instance
+6. When an agent invokes a tool, the plugin proxies the call to the MCP server
+7. If the connection dies, it automatically reconnects on the next tool call
 
 ## Example: AgentMail
 
