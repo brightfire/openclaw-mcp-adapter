@@ -167,7 +167,7 @@ Use `${VAR_NAME}` in `env` and `headers` values to reference environment variabl
 }
 ```
 
-This registers tools like `agentmail_create_inbox`, `agentmail_send_email`, etc.
+This registers tools like `agentmail__create_inbox`, `agentmail__send_email`, etc.
 
 ## License
 
