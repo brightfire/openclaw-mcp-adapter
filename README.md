@@ -1,4 +1,4 @@
-# MCP Adapter (OpenClaw Plugin)
+# OpenClaw MCP Adapter
 
 Exposes MCP (Model Context Protocol) server tools as native OpenClaw agent tools.
 
@@ -13,7 +13,7 @@ Instead of running MCP servers through a CLI skill, this plugin connects to your
 ## Installation
 
 ```bash
-openclaw plugins install mcp-adapter
+openclaw plugins install openclaw-mcp-adapter
 ```
 
 **Alternative: install from source**
@@ -33,7 +33,7 @@ Add to `~/.openclaw/openclaw.json`:
 {
   "plugins": {
     "entries": {
-      "mcp-adapter": {
+      "openclaw-mcp-adapter": {
         "enabled": true,
         "config": {
           "servers": [
@@ -56,14 +56,14 @@ Add to `~/.openclaw/openclaw.json`:
 
 ### 2. Allow for sandboxed agents
 
-Add `"mcp-adapter"` to your sandbox tool allowlist:
+Add `"openclaw-mcp-adapter"` to your sandbox tool allowlist:
 
 ```json
 {
   "tools": {
     "sandbox": {
       "tools": {
-        "allow": ["group:runtime", "group:fs", "mcp-adapter"]
+        "allow": ["group:runtime", "group:fs", "openclaw-mcp-adapter"]
       }
     }
   }
@@ -80,7 +80,7 @@ openclaw gateway restart
 
 ```bash
 openclaw plugins list
-# Should show: MCP Adapter | mcp-adapter | loaded
+# Should show: OpenClaw MCP Adapter | openclaw-mcp-adapter | loaded
 ```
 
 ## Server Configuration
